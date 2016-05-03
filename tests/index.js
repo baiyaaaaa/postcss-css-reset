@@ -18,8 +18,8 @@ features.forEach((name) => {
       let expectedCSS = fs.readFileSync(path.join(featurePath, name + '.expected.css'), 'utf8');
 
       fs.writeFileSync(path.join(featurePath, name + '.actual.css'), actualCSS);
-      
-      t.equal(actualCSS, expectedCSS, 'feature ' + name + ' test passed!');
+
+      t.equal(actualCSS, expectedCSS);
       t.end();
     });
   });
