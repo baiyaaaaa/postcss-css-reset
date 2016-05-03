@@ -1,3 +1,4 @@
 node_modules/
 lib/
+tests/features/*.actual.css
 npm-debug.log
