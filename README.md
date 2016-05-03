@@ -25,7 +25,6 @@ sup { vertical-align: text-top }
 sub { vertical-align: text-bottom }
 input, textarea, select { font-family: inherit; font-size: inherit; font-weight: inherit }
 input, textarea, select { *font-size: 100% }
-```
 
 /* before */
 @reset-global mobile;
