@@ -1,6 +1,7 @@
 'use strict';
 
-const plugin = require('../lib/index.js');
+const cssReset = require('../lib/index.js');
+const discardComment = require('postcss-discard-comments');
 const postcss = require('postcss');
 const fs = require('fs');
 const path = require('path');
@@ -13,7 +14,7 @@ features.forEach((name) => {
   let inputCSS = fs.readFileSync(path.join(featurePath, name + '.css'), 'utf8');
 
   tape(name, (t) => {
-    postcss([plugin]).process(inputCSS).then((result) => {
+    postcss([cssReset, discardComment]).process(inputCSS).then((result) => {
       let actualCSS = result.css;
       let expectedCSS = fs.readFileSync(path.join(featurePath, name + '.expected.css'), 'utf8');
 
