@@ -422,17 +422,20 @@ textarea {
 
 input::-moz-placeholder,
 textarea::-moz-placeholder {
-    color: $colorPlaceholder;
+  color: inherit;
+  opacity: 0.54;
 }
 
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
-    color: $colorPlaceholder;
+  color: inherit;
+  opacity: 0.54;
 }
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-    color: $colorPlaceholder;
+  color: inherit;
+  opacity: 0.54;
 }
 
 input::-ms-clear,
