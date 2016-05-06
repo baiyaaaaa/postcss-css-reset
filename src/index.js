@@ -59,24 +59,26 @@ module.exports = postcss.plugin('postcss-reset', (opts) => {
   let options = Object.assign({}, opts);
 
   return (root) => {
-    return new Promise(function (resolve, reject) {
-      root.walkAtRules(/^reset-/i, (rule) => {
-        var parser = atRules[rule.name];
+    let promises = [];
+    
+    root.walkAtRules(/^reset-/i, (rule) => {
+      var parser = atRules[rule.name];
 
-        if (parser) {
-          let params = rule.params.trim() ? rule.params.trim().split(' ') : [];
-
-          parser(...params).then((resetRules) => {
-            if (typeof resetRules === 'object') {
-              applyRuleSetToNode(resetRules, rule.parent, rule);
-            } else {
-              root.prepend(resetRules);
-            }
-            resolve();
-            rule.remove();
-          });
-        }
-      });
+      if (parser) {
+        let params = rule.params.trim() ? rule.params.trim().split(' ') : [];
+        let promise = parser(...params);
+        
+        promises.push(promise);
+        promise.then((resetRules) => {
+          if (typeof resetRules === 'object') {
+            applyRuleSetToNode(resetRules, rule.parent, rule);
+          } else {
+            root.prepend(resetRules);
+          }
+          rule.remove();
+        }).catch(console.error);
+      }
     });
+    return Promise.all(promises);
   };
 });

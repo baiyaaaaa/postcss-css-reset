@@ -3,12 +3,12 @@
 var fs = require('fs');
 var path = require('path');
 var resetion = {
-  'tabel': {
+  'table': {
     'border-collapse': 'collapse',
     'border-spacing': '0',
     'vertical-align': 'middle'
   },
-  'tabel-cell': {
+  'table-cell': {
     'text-align': 'left',
     'font-weight': 'normal',
     'vertical-align': 'middle',
@@ -36,10 +36,14 @@ var resetion = {
 export default {
   resetGlobal(platefprm) {
     return new Promise((resolve, reject) => {
-      var inputPath = path.resolve(`src/styles/reset.${platefprm}.css`);
+      var inputPath = path.resolve(__dirname, `../src/styles/reset.${platefprm}.css`);
 
       fs.readFile(inputPath, 'utf8', function (err, file) {
-        resolve(file);
+        if(err) {
+          reject(err);
+        } else {
+          resolve(file);
+        }
       });
     });
   },
